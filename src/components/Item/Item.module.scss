@@ -1,8 +1,8 @@
 @use '@/styles/utils' as *;
 
 .item {
-  box-shadow: 0 0 6px black;
-  border-radius: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius-m);
   overflow: hidden;
   display: flex;
   flex-direction: column;

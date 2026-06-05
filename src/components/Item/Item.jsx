@@ -1,15 +1,15 @@
 import Loader from '@/components/Loader/Loader'
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import styles from './Item.module.scss'
 
-const Item = memo(function Item({
+export default function Item({
   offerId,
   devName,
   regularPrice,
   newDisplayAsset,
   tracks,
   colors: { color1, color2, color3 },
-  addToBasket,
+  addToBasket = Function.prototype,
 }) {
   const [imgLoading, setImgLoading] = useState(true)
 
@@ -47,12 +47,13 @@ const Item = memo(function Item({
         <ul className={styles.info}>
           <li>{desc}</li>
         </ul>
-        <button className={styles.button} onClick={() => addToBasket(offerId)}>
+        <button
+          className={styles.button}
+          onClick={() => addToBasket({ offerId, title, regularPrice })}
+        >
           {regularPrice}
         </button>
       </footer>
     </article>
   )
-})
-
-export default Item
+}

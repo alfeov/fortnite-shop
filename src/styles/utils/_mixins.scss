@@ -30,9 +30,32 @@
   color: var(--button-text-color);
   border: none;
   padding: 1.4rem 1.8rem;
-  border-radius: 2rem;
+  border-radius: var(--border-radius-m);
   transition: box-shadow var(--transition-duration);
   &:hover {
-    box-shadow: 0 0 6px var(--primary-color);
+    box-shadow: var(--box-shadow);
+  }
+}
+
+@mixin svg-button($width: 4rem, $height: 4rem) {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-s);
+  transition: 400ms;
+  &:hover {
+    background-color: var(--primary-color);
+    box-shadow: var(--box-shadow);
+    color: var(--secondary-color);
+  }
+  svg {
+    transition: 400ms;
+    width: $width;
+    height: $height;
   }
 }

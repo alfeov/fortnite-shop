@@ -1,0 +1,25 @@
+@use '@/styles/utils' as *;
+
+.basketItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  &__title {
+    @include truncate;
+    flex-grow: 1;
+  }
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+  &__plusBtn,
+  &__minusBtn {
+    @include svg-button();
+    height: 3rem;
+    width: 3rem;
+  }
+}

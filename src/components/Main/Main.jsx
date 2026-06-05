@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Basket from '@/components/Basket/Basket'
 import Loader from '@/components/Loader/Loader'
 import Items from '@/components/Items/Items'
@@ -9,15 +9,21 @@ export default function Main() {
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-  const [basketItems, setBasketItems] = useState([])
+  const [order, setOrder] = useState([])
 
-  const addToBasket = useCallback(
-    (itemId) => {
-      const item = items.find(({ offerId }) => offerId === itemId)
-      setBasketItems([...basketItems, item])
-    },
-    [basketItems, items],
-  )
+  function addToBasket(item) {
+    let isItemInOrder = false
+    const updatedOrder = [...order].map((orderItem) => {
+      if (orderItem.offerId === item.offerId) {
+        isItemInOrder = true
+        return { ...orderItem, quantity: orderItem.quantity + 1 }
+      }
+      return orderItem
+    })
+    setOrder(
+      isItemInOrder ? updatedOrder : [...order, { ...item, quantity: 1 }],
+    )
+  }
 
   useEffect(() => {
     async function searchItems() {
@@ -44,7 +50,7 @@ export default function Main() {
 
   return (
     <main className={styles.main}>
-      <Basket basketItems={basketItems} />
+      <Basket order={order} />
       <Items>
         {isLoading ? (
           <div className={styles.loader}>
