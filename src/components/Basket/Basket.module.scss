@@ -1,0 +1,40 @@
+@use '@/styles/utils' as *;
+
+.basket_openBtn {
+  @include button;
+  width: 100%;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  position: relative;
+  img {
+    margin-left: 0.5rem;
+    height: 4rem;
+  }
+}
+
+.count {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  min-width: 2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.basket {
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: backdrop-filter 200ms;
+    transition-delay: 100ms;
+    backdrop-filter: blur(7px);
+  }
+}
+
+.basket_closeBtn {
+  @include button;
+}

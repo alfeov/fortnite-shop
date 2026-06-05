@@ -1,0 +1,38 @@
+@use './vars' as *;
+
+@mixin container() {
+  padding: 0 3rem;
+  @media ($tablet) {
+    padding: 0 4rem;
+  }
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin truncate() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin multiline-truncate($lines: 3) {
+  display: -webkit-box; /* Specify that we want to use webkit-box */
+  -webkit-box-orient: vertical; /* Indicate the text direction */
+  -webkit-line-clamp: $lines; /* Set the desired number of lines */
+  overflow: hidden; /* Hide any overflow */
+}
+
+@mixin button() {
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 1.4rem 1.8rem;
+  border-radius: 2rem;
+  transition: box-shadow var(--transition-duration);
+  &:hover {
+    box-shadow: 0 0 6px var(--primary-color);
+  }
+}
