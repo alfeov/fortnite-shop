@@ -25,6 +25,39 @@ export default function Main() {
     )
   }
 
+  function increaseOrderItem(itemId) {
+    // TODO
+    const updatedOrder = [...order].map((orderItem) => {
+      if (orderItem.offerId === itemId)
+        return { ...orderItem, quantity: orderItem.quantity + 1 }
+      return orderItem
+    })
+    setOrder(updatedOrder)
+  }
+
+  function decreaseOrderItem(itemId, quantity) {
+    // TODO
+    if (quantity === 1) {
+      deleteOrderItem(itemId)
+    } else {
+      const updatedOrder = [...order].map((orderItem) => {
+        if (orderItem.offerId === itemId)
+          return { ...orderItem, quantity: orderItem.quantity - 1 }
+        return orderItem
+      })
+      setOrder(updatedOrder)
+    }
+  }
+
+  function deleteOrderItem(itemId) {
+    const updatedOrder = [...order].filter(({ offerId }) => offerId !== itemId)
+    setOrder(updatedOrder)
+  }
+
+  function deleteAllOrderItems() {
+    setOrder([])
+  }
+
   useEffect(() => {
     async function searchItems() {
       try {

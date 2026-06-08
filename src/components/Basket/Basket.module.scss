@@ -36,26 +36,86 @@
 }
 
 .basket {
-  width: 90%;
-  padding: 2rem;
+  padding: 0;
   border: none;
-  border-radius: var(--border-radius-m);
-
+  background-color: transparent;
+  width: 90%;
   @media ($tablet) {
     max-width: 70rem;
     width: 100%;
   }
 
+  &__container {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius-m);
+    padding: 3rem 2rem;
+    display: grid;
+    gap: 2rem;
+  }
+
+  // animation properties
+  transition:
+    display var(--transition-duration-m) allow-discrete,
+    overlay var(--transition-duration-m) allow-discrete;
+  animation: close-basket var(--transition-duration-m) forwards;
+
+  &[open] {
+    animation: open-basket var(--transition-duration-m) forwards;
+  }
+
+  &::backdrop {
+    transition:
+      display var(--transition-duration-m) allow-discrete,
+      overlay var(--transition-duration-m) allow-discrete;
+    animation: close-backdrop var(--transition-duration-m) forwards;
+  }
+  &[open]::backdrop {
+    animation: open-backdrop var(--transition-duration-m) forwards;
+  }
+
+  @keyframes open-backdrop {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+    }
+    to {
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(7px);
+    }
+  }
+  @keyframes close-backdrop {
+    from {
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(7px);
+    }
+    to {
+      background-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+    }
+  }
+  @keyframes open-basket {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes close-basket {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  // end
+
   &__title {
     font-size: 2.4rem;
     font-weight: 600;
     text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  &::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(7px);
   }
 
   &__list {
@@ -89,8 +149,6 @@
 }
 
 .basket__confirmBtn {
-  width: 100%;
-  margin: 1rem 0;
   @include button;
 }
 

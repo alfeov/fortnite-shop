@@ -4,7 +4,7 @@ export default function BasketItem({ title, regularPrice, quantity }) {
   return (
     <li className={styles.basketItem}>
       <p className={styles.basketItem__actions}>
-        <button className={styles.basketItem__minusBtn}>
+        <button aria-label='decrease' className={styles.basketItem__minusBtn}>
           <svg
             viewBox='0 0 24 24'
             fill='none'
@@ -29,7 +29,7 @@ export default function BasketItem({ title, regularPrice, quantity }) {
           </svg>
         </button>
         <span className={styles.basketItem__quantity}>{quantity}</span>
-        <button className={styles.basketItem__plusBtn}>
+        <button aria-label='increase' className={styles.basketItem__plusBtn}>
           <svg
             viewBox='0 0 24 24'
             fill='currentColor'

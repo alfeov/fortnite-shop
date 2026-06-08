@@ -51,7 +51,7 @@ export default function Item({
           className={styles.button}
           onClick={() => addToBasket({ offerId, title, regularPrice })}
         >
-          {regularPrice}
+          {regularPrice}$
         </button>
       </footer>
     </article>

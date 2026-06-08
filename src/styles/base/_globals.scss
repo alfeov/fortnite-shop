@@ -2,6 +2,11 @@ html {
   font-size: 10px;
 }
 
+// ? I don't want white space instead scrollbar
+// html:has(dialog[open]) {
+//   overflow: hidden;
+// }
+
 body {
   font-family: 'Inter', sans-serif;
   font-size: 1.4rem;

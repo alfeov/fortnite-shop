@@ -27,11 +27,12 @@
 
 @mixin button() {
   background-color: var(--primary-color);
-  color: var(--button-text-color);
+  color: white; // if contrast-color not available
+  color: contrast-color(var(--primary-color));
   border: none;
   padding: 1.4rem 1.8rem;
   border-radius: var(--border-radius-m);
-  transition: box-shadow var(--transition-duration);
+  transition: box-shadow var(--transition-duration-s);
   &:hover {
     box-shadow: var(--box-shadow);
   }
@@ -54,7 +55,6 @@
     color: var(--secondary-color);
   }
   svg {
-    transition: 400ms;
     width: $width;
     height: $height;
   }
