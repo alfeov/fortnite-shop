@@ -16,10 +16,15 @@
     font-weight: 600;
     font-size: 1.6rem;
   }
-  &__plusBtn,
-  &__minusBtn {
+  &__quantity {
+    min-width: 1.7rem;
+    text-align: center;
+  }
+  &__increaseBtn,
+  &__decreaseBtn {
     @include svg-button();
     height: 3rem;
     width: 3rem;
+    user-select: none;
   }
 }

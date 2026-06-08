@@ -1,10 +1,23 @@
 import styles from './BasketItem.module.scss'
 
-export default function BasketItem({ title, regularPrice, quantity }) {
+export default function BasketItem({
+  offerId,
+  title,
+  regularPrice,
+  quantity,
+  increaseOrderItem = Function.prototype,
+  decreaseOrderItem = Function.prototype,
+}) {
   return (
     <li className={styles.basketItem}>
       <p className={styles.basketItem__actions}>
-        <button aria-label='decrease' className={styles.basketItem__minusBtn}>
+        <button
+          aria-label='decrease'
+          className={styles.basketItem__decreaseBtn}
+          onClick={() => {
+            decreaseOrderItem(offerId, quantity)
+          }}
+        >
           <svg
             viewBox='0 0 24 24'
             fill='none'
@@ -29,7 +42,13 @@ export default function BasketItem({ title, regularPrice, quantity }) {
           </svg>
         </button>
         <span className={styles.basketItem__quantity}>{quantity}</span>
-        <button aria-label='increase' className={styles.basketItem__plusBtn}>
+        <button
+          aria-label='increase'
+          className={styles.basketItem__increaseBtn}
+          onClick={() => {
+            increaseOrderItem(offerId)
+          }}
+        >
           <svg
             viewBox='0 0 24 24'
             fill='currentColor'

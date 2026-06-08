@@ -26,7 +26,6 @@ export default function Main() {
   }
 
   function increaseOrderItem(itemId) {
-    // TODO
     const updatedOrder = [...order].map((orderItem) => {
       if (orderItem.offerId === itemId)
         return { ...orderItem, quantity: orderItem.quantity + 1 }
@@ -36,9 +35,8 @@ export default function Main() {
   }
 
   function decreaseOrderItem(itemId, quantity) {
-    // TODO
     if (quantity === 1) {
-      deleteOrderItem(itemId)
+      removeFromBasket(itemId)
     } else {
       const updatedOrder = [...order].map((orderItem) => {
         if (orderItem.offerId === itemId)
@@ -49,13 +47,13 @@ export default function Main() {
     }
   }
 
-  function deleteOrderItem(itemId) {
+  function removeFromBasket(itemId) {
     const updatedOrder = [...order].filter(({ offerId }) => offerId !== itemId)
     setOrder(updatedOrder)
   }
 
-  function deleteAllOrderItems() {
-    setOrder([])
+  function removeAllOrderItems() {
+    if (order.length) setOrder([])
   }
 
   useEffect(() => {
@@ -64,6 +62,7 @@ export default function Main() {
         const response = await fetch('https://fortnite-api.com/v2/shop')
         if (!response.ok) throw new Error('HTTP:' + response.status)
         const data = await response.json()
+        // ! custom limit
         setItems(data?.data.entries.slice(0, 10) ?? [])
       } catch (error) {
         setIsError(true)
@@ -83,7 +82,12 @@ export default function Main() {
 
   return (
     <main className={styles.main}>
-      <Basket order={order} />
+      <Basket
+        order={order}
+        removeAllOrderItems={removeAllOrderItems}
+        increaseOrderItem={increaseOrderItem}
+        decreaseOrderItem={decreaseOrderItem}
+      />
       <Items>
         {isLoading ? (
           <div className={styles.loader}>

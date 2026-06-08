@@ -3,7 +3,12 @@ import BasketItem from '@/components/BasketItem/BasketItem'
 import styles from './Basket.module.scss'
 import icon from '@/assets/icons/basket.svg'
 
-export default function Basket({ order }) {
+export default function Basket({
+  order,
+  removeAllOrderItems = Function.prototype,
+  increaseOrderItem = Function.prototype,
+  decreaseOrderItem = Function.prototype,
+}) {
   const modal = useRef()
 
   function showModal() {
@@ -20,6 +25,7 @@ export default function Basket({ order }) {
   )
 
   function handleConfirmBtnClick() {
+    removeAllOrderItems()
     closeModal()
   }
 
@@ -55,7 +61,14 @@ export default function Basket({ order }) {
           ) : (
             <ul className={styles.basket__list}>
               {order.map((orderItem) => {
-                return <BasketItem key={orderItem.offerId} {...orderItem} />
+                return (
+                  <BasketItem
+                    key={orderItem.offerId}
+                    {...orderItem}
+                    increaseOrderItem={increaseOrderItem}
+                    decreaseOrderItem={decreaseOrderItem}
+                  />
+                )
               })}
               <li className={styles.basket__item}>
                 <p className={styles.basket__text}>Total Price: </p>
@@ -97,6 +110,7 @@ export default function Basket({ order }) {
           <button
             aria-label='delete all'
             className={styles.basket__deleteAllBtn}
+            onClick={removeAllOrderItems}
           >
             <svg
               viewBox='0 0 24 24'
