@@ -1,13 +1,8 @@
+import { useShopDispatch } from '@/ShopContext'
 import styles from './BasketItem.module.scss'
 
-export default function BasketItem({
-  offerId,
-  title,
-  regularPrice,
-  quantity,
-  increaseOrderItem = Function.prototype,
-  decreaseOrderItem = Function.prototype,
-}) {
+export default function BasketItem({ offerId, title, regularPrice, quantity }) {
+  const dispatch = useShopDispatch()
   return (
     <li className={styles.basketItem}>
       <p className={styles.basketItem__actions}>
@@ -15,7 +10,11 @@ export default function BasketItem({
           aria-label='decrease'
           className={styles.basketItem__decreaseBtn}
           onClick={() => {
-            decreaseOrderItem(offerId, quantity)
+            if (quantity <= 1) {
+              dispatch({ type: 'remove_from_order', payload: offerId })
+            } else {
+              dispatch({ type: 'decrease_order_item', payload: offerId })
+            }
           }}
         >
           <svg
@@ -46,7 +45,7 @@ export default function BasketItem({
           aria-label='increase'
           className={styles.basketItem__increaseBtn}
           onClick={() => {
-            increaseOrderItem(offerId)
+            dispatch({ type: 'increase_order_item', payload: offerId })
           }}
         >
           <svg

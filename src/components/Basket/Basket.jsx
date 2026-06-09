@@ -1,14 +1,12 @@
 import { useRef } from 'react'
+import { useShop, useShopDispatch } from '@/ShopContext'
 import BasketItem from '@/components/BasketItem/BasketItem'
 import styles from './Basket.module.scss'
 import icon from '@/assets/icons/basket.svg'
 
-export default function Basket({
-  order,
-  removeAllOrderItems = Function.prototype,
-  increaseOrderItem = Function.prototype,
-  decreaseOrderItem = Function.prototype,
-}) {
+export default function Basket() {
+  const { order } = useShop()
+  const dispatch = useShopDispatch()
   const modal = useRef()
 
   function showModal() {
@@ -24,12 +22,16 @@ export default function Basket({
     0,
   )
 
-  function handleConfirmBtnClick() {
-    removeAllOrderItems()
+  function handleConfirmClick() {
+    dispatch({ type: 'clear_order' })
     closeModal()
   }
 
-  function handleCloseBtnClick() {
+  function handleDeleteAllClick() {
+    dispatch({ type: 'clear_order' })
+  }
+
+  function handleCloseClick() {
     closeModal()
   }
 
@@ -61,14 +63,7 @@ export default function Basket({
           ) : (
             <ul className={styles.basket__list}>
               {order.map((orderItem) => {
-                return (
-                  <BasketItem
-                    key={orderItem.offerId}
-                    {...orderItem}
-                    increaseOrderItem={increaseOrderItem}
-                    decreaseOrderItem={decreaseOrderItem}
-                  />
-                )
+                return <BasketItem key={orderItem.offerId} {...orderItem} />
               })}
               <li className={styles.basket__item}>
                 <p className={styles.basket__text}>Total Price: </p>
@@ -78,14 +73,14 @@ export default function Basket({
           )}
           <button
             className={styles.basket__confirmBtn}
-            onClick={handleConfirmBtnClick}
+            onClick={handleConfirmClick}
           >
             Confirm
           </button>
           <button
             aria-label='close'
             className={styles.basket__closeBtn}
-            onClick={handleCloseBtnClick}
+            onClick={handleCloseClick}
           >
             <svg
               viewBox='0 -0.5 25 25'
@@ -110,7 +105,7 @@ export default function Basket({
           <button
             aria-label='delete all'
             className={styles.basket__deleteAllBtn}
-            onClick={removeAllOrderItems}
+            onClick={handleDeleteAllClick}
           >
             <svg
               viewBox='0 0 24 24'

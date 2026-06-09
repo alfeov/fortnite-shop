@@ -1,11 +1,14 @@
 import Main from '@/components/Main/Main'
 import Header from '@/components/Header/Header'
+import { ShopProvider } from '@/ShopProvider'
 
 function App() {
   return (
     <>
       <Header />
-      <Main />
+      <ShopProvider>
+        <Main />
+      </ShopProvider>
     </>
   )
 }

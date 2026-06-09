@@ -1,7 +1,8 @@
 import Loader from '@/components/Loader/Loader'
 import { useState } from 'react'
-import styles from './Item.module.scss'
+import { useShopDispatch } from '../../ShopContext'
 import noImage from '@/assets/images/no-image.png'
+import styles from './Item.module.scss'
 
 export default function Item({
   offerId,
@@ -10,9 +11,10 @@ export default function Item({
   newDisplayAsset,
   tracks,
   colors: { color1, color2, color3 },
-  addToBasket = Function.prototype,
+  notificationHandler = Function.prototype,
 }) {
   const [imgLoading, setImgLoading] = useState(true)
+  const dispatch = useShopDispatch()
   const handleLoad = () => {
     setImgLoading(false)
   }
@@ -53,7 +55,13 @@ export default function Item({
         </ul>
         <button
           className={styles.button}
-          onClick={() => addToBasket({ offerId, title, regularPrice })}
+          onClick={() => {
+            dispatch({
+              type: 'add_to_order',
+              payload: { offerId, title, regularPrice },
+            })
+            notificationHandler()
+          }}
         >
           {regularPrice}$
         </button>
