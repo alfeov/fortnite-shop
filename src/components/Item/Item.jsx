@@ -1,6 +1,7 @@
 import Loader from '@/components/Loader/Loader'
 import { useState } from 'react'
 import styles from './Item.module.scss'
+import noImage from '@/assets/images/no-image.png'
 
 export default function Item({
   offerId,
@@ -12,7 +13,6 @@ export default function Item({
   addToBasket = Function.prototype,
 }) {
   const [imgLoading, setImgLoading] = useState(true)
-
   const handleLoad = () => {
     setImgLoading(false)
   }
@@ -37,7 +37,11 @@ export default function Item({
             opacity: imgLoading ? '0' : '1',
             background: `linear-gradient(#${color1}, ${color2 ? '#' + color2 + ',' : ''} #${color3})`,
           }}
-          src={newDisplayAsset?.renderImages[0]?.image ?? tracks[0]?.albumArt}
+          src={
+            newDisplayAsset?.renderImages?.[0]?.image ??
+            tracks?.[0]?.albumArt ??
+            noImage
+          }
           alt='Item image'
           onLoad={handleLoad}
         />

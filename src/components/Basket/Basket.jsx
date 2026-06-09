@@ -43,7 +43,7 @@ export default function Basket({
     <>
       <button className={styles.openBasketBtn} onClick={showModal}>
         <span>Go to Basket...</span>
-        <img src={icon} alt='basket image' />
+        <img src={icon} alt='basket icon' />
         <div className={styles.openBasketBtn__counter}>{order.length}</div>
       </button>
       <dialog

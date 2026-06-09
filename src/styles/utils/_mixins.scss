@@ -33,6 +33,9 @@
   padding: 1.4rem 1.8rem;
   border-radius: var(--border-radius-m);
   transition: box-shadow var(--transition-duration-s);
+  &:focus-visible {
+    outline-offset: 3px; // for outline visibility on tab
+  }
   &:hover {
     box-shadow: var(--box-shadow);
   }
