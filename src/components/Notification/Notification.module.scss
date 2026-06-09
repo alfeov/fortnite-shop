@@ -1,0 +1,44 @@
+@use '@/styles/utils' as *;
+.notification {
+  position: fixed;
+  right: 2rem;
+  bottom: 9rem;
+  width: 20rem;
+  text-align: center;
+  padding: 1rem 0;
+  background-color: var(--primary-color);
+  color: white;
+  color: contrast-color(var(--primary-color));
+  box-shadow: 0 0 6px var(--secondary-color);
+  border-radius: var(--border-radius-m);
+  z-index: 5;
+  @media ($laptop) {
+    bottom: 10rem;
+    right: 5rem;
+  }
+
+  //animation properties
+  transition: display var(--transition-duration-s) allow-discrete;
+  animation:
+    show var(--transition-duration-s) forwards,
+    hide var(--transition-duration-s) 3s forwards;
+
+  @keyframes show {
+    from {
+      opacity: 0;
+      bottom: 8rem;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes hide {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      bottom: 11rem;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import Basket from '@/components/Basket/Basket'
 import Loader from '@/components/Loader/Loader'
 import Items from '@/components/Items/Items'
 import Item from '@/components/Item/Item'
+import Notification from '@/components/Notification/Notification'
 import styles from './Main.module.scss'
 
 export default function Main() {
@@ -10,6 +11,7 @@ export default function Main() {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [order, setOrder] = useState([])
+  const [showNotification, setShowNotification] = useState(false)
 
   function addToBasket(item) {
     let isItemInOrder = false
@@ -23,6 +25,10 @@ export default function Main() {
     setOrder(
       isItemInOrder ? updatedOrder : [...order, { ...item, quantity: 1 }],
     )
+    if (showNotification) setShowNotification(false)
+    setTimeout(() => {
+      setShowNotification(true)
+    }, 0)
   }
 
   function increaseOrderItem(itemId) {
@@ -35,7 +41,7 @@ export default function Main() {
   }
 
   function decreaseOrderItem(itemId, quantity) {
-    if (quantity === 1) {
+    if (quantity <= 1) {
       removeFromBasket(itemId)
     } else {
       const updatedOrder = [...order].map((orderItem) => {
@@ -88,6 +94,7 @@ export default function Main() {
         increaseOrderItem={increaseOrderItem}
         decreaseOrderItem={decreaseOrderItem}
       />
+      {showNotification && <Notification message={'Item has been added'} />}
       <Items>
         {isLoading ? (
           <div className={styles.loader}>
