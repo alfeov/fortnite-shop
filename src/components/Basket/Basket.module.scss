@@ -14,14 +14,16 @@
   padding: 1rem 0;
   position: relative;
   position: fixed;
-  img {
-    margin-left: 0.5rem;
-    height: 4rem;
-  }
   @media ($laptop) {
     bottom: 3rem;
     right: 5rem;
   }
+}
+
+.icon {
+  margin-left: 0.5rem;
+  height: 4rem;
+  width: fit-content;
 }
 
 .openBasketBtn__counter {
@@ -138,7 +140,7 @@
     top: 2rem;
     right: 2rem;
 
-    @include svg-button();
+    @include svg-button(3rem, 3rem);
   }
 
   &__deleteAllBtn {

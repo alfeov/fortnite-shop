@@ -45,6 +45,7 @@ export default function Item({
             noImage
           }
           alt='Item image'
+          loading='lazy'
           onLoad={handleLoad}
         />
       </div>

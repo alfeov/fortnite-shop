@@ -22,7 +22,7 @@
   }
   &__increaseBtn,
   &__decreaseBtn {
-    @include svg-button();
+    @include svg-button(2rem, 2rem);
     height: 3rem;
     width: 3rem;
     user-select: none;

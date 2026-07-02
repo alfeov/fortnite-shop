@@ -7,6 +7,7 @@ import Items from '@/components/Items/Items'
 import Item from '@/components/Item/Item'
 import styles from './Main.module.scss'
 
+let didInit = false
 export default function Main() {
   const { items, isLoading, isError } = useShop()
   const [showNotification, setShowNotification] = useState(false)
@@ -32,7 +33,10 @@ export default function Main() {
       }
     }
 
-    searchItems()
+    if (!didInit) {
+      didInit = true
+      searchItems()
+    }
   }, []) // only on first init
 
   function notificationHandler() {
