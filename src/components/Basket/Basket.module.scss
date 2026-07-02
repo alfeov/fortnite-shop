@@ -1,5 +1,9 @@
 @use '@/styles/utils' as *;
 
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 .openBasketBtn {
   @include button;
   width: 20rem;
