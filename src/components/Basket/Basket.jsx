@@ -45,7 +45,11 @@ export default function Basket() {
 
   return (
     <>
-      <button className={styles.openBasketBtn} onClick={showModal}>
+      <button
+        className={styles.openBasketBtn}
+        onClick={showModal}
+        aria-label='Open basket'
+      >
         Go to Basket...
         <BasketIcon className={styles.icon} />
         <div className={styles.openBasketBtn__counter}>{order.length}</div>
@@ -76,6 +80,7 @@ export default function Basket() {
           <button
             className={styles.basket__confirmBtn}
             onClick={handleConfirmClick}
+            aria-label='Confirm'
           >
             Confirm
           </button>

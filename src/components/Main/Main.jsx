@@ -37,6 +37,7 @@ export default function Main() {
       didInit = true
       searchItems()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // only on first init
 
   function notificationHandler() {

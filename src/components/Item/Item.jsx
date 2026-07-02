@@ -63,6 +63,7 @@ export default function Item({
             })
             notificationHandler()
           }}
+          aria-label='add to order'
         >
           {regularPrice}$
         </button>
