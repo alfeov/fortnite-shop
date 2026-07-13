@@ -61,7 +61,23 @@ export default function Basket() {
         onClick={handleEmptySpaceClick}
       >
         <div className={styles.basket__container}>
-          <p className={styles.basket__title}>Basket</p>
+          <div className={styles.basket__header}>
+            <button
+              aria-label='close'
+              className={styles.basket__closeBtn}
+              onClick={handleCloseClick}
+            >
+              <XIcon />
+            </button>
+            <p className={styles.basket__title}>Basket</p>
+            <button
+              aria-label='delete all'
+              className={styles.basket__deleteAllBtn}
+              onClick={handleDeleteAllClick}
+            >
+              <TrashIcon />
+            </button>
+          </div>
           {order.length === 0 ? (
             <div className={styles.emptyMessage}>
               <p>There is nothing here yet...</p>
@@ -83,20 +99,6 @@ export default function Basket() {
             aria-label='Confirm'
           >
             Confirm
-          </button>
-          <button
-            aria-label='close'
-            className={styles.basket__closeBtn}
-            onClick={handleCloseClick}
-          >
-            <XIcon />
-          </button>
-          <button
-            aria-label='delete all'
-            className={styles.basket__deleteAllBtn}
-            onClick={handleDeleteAllClick}
-          >
-            <TrashIcon />
           </button>
         </div>
       </dialog>

@@ -6,8 +6,9 @@
   gap: 1rem;
   padding: 1rem;
   &__title {
-    @include truncate;
     flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__actions {
     display: flex;

@@ -55,7 +55,8 @@ html:has(dialog[open]) {
     background-color: var(--secondary-color);
     border-radius: var(--border-radius-m);
     padding: 3rem 2rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
   }
 
@@ -118,10 +119,20 @@ html:has(dialog[open]) {
   }
   // end
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__title {
     font-size: 2.4rem;
     font-weight: 600;
     text-align: center;
+  }
+
+  &__closeBtn,
+  &__deleteAllBtn {
+    @include svg-button(3rem, 3rem);
   }
 
   &__list {
@@ -137,20 +148,6 @@ html:has(dialog[open]) {
 
   &__text {
     flex-grow: 1;
-  }
-
-  &__closeBtn {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-
-    @include svg-button(3rem, 3rem);
-  }
-
-  &__deleteAllBtn {
-    @include svg-button(3rem, 3rem);
-    position: absolute;
-    top: 2rem;
   }
 }
 
